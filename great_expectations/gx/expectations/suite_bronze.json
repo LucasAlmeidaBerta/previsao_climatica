@@ -1,0 +1,9 @@
+{
+  "expectations": [],
+  "id": "32fc1bdb-4f82-4a6a-ad6a-e71213377bce",
+  "meta": {
+    "great_expectations_version": "1.4.5"
+  },
+  "name": "suite_bronze",
+  "notes": null
+}

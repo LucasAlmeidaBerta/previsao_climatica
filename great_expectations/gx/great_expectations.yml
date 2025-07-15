@@ -1,0 +1,1651 @@
+# Welcome to Great Expectations! Always know what to expect from your data.
+#
+# Here you can define datasources, batch kwargs generators, integrations and
+# more. This file is intended to be committed to your repo. For help with
+# configuration please:
+#   - Read our docs: https://docs.greatexpectations.io/docs/guides/connecting_to_your_data/connect_to_data_overview/#2-configure-your-datasource
+#   - Join our slack channel: http://greatexpectations.io/slack
+
+# config_version refers to the syntactic version of this config file, and is used in maintaining backwards compatibility
+# It is auto-generated and usually does not need to be changed.
+config_version: 4.0
+
+# This config file supports variable substitution which enables: 1) keeping
+# secrets out of source control & 2) environment-based configuration changes
+# such as staging vs prod.
+#
+# When GX encounters substitution syntax (like `my_key: ${my_value}` or
+# `my_key: $my_value`) in the great_expectations.yml file, it will attempt
+# to replace the value of `my_key` with the value from an environment
+# variable `my_value` or a corresponding key read from this config file,
+# which is defined through the `config_variables_file_path`.
+# Environment variables take precedence over variables defined here.
+#
+# Substitution values defined here can be a simple (non-nested) value,
+# nested value such as a dictionary, or an environment variable (i.e. ${ENV_VAR})
+#
+#
+# https://docs.greatexpectations.io/docs/guides/setup/configuring_data_contexts/how_to_configure_credentials
+
+
+config_variables_file_path: uncommitted/config_variables.yml
+
+# The plugins_directory will be added to your python path for custom modules
+# used to override and extend Great Expectations.
+plugins_directory: plugins/
+
+stores:
+# Stores are configurable places to store things like Expectations, Validations
+# Data Docs, and more. These are for advanced users only - most users can simply
+# leave this section alone.
+  expectations_store:
+    class_name: ExpectationsStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: expectations/
+
+  validation_results_store:
+    class_name: ValidationResultsStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: uncommitted/validations/
+
+  checkpoint_store:
+    class_name: CheckpointStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      suppress_store_backend_id: true
+      base_directory: checkpoints/
+
+  validation_definition_store:
+    class_name: ValidationDefinitionStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: validation_definitions/
+
+expectations_store_name: expectations_store
+validation_results_store_name: validation_results_store
+checkpoint_store_name: checkpoint_store
+
+data_docs_sites:
+  # Data Docs make it simple to visualize data quality in your project. These
+  # include Expectations, Validations & Profiles. The are built for all
+  # Datasources from JSON artifacts in the local repo including validations &
+  # profiles from the uncommitted directory. Read more at https://docs.greatexpectations.io/docs/terms/data_docs
+  local_site:
+    class_name: SiteBuilder
+    show_how_to_buttons: true
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: uncommitted/data_docs/local_site/
+    site_index_builder:
+      class_name: DefaultSiteIndexBuilder
+fluent_datasources:
+  gx_bronze:
+    type: spark
+    id: 94f7166a-42d8-4b2a-b454-9a1d53189220
+    assets:
+      data_asset_bronze:
+        type: dataframe
+        id: 18985f39-2397-4958-9769-8f157fb68913
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250520172538:
+            id: a70eafd1-57a8-4875-acde-b874100c9984
+            partitioner:
+          batch_20250520172605:
+            id: e0bdeaa4-ef73-4e17-b1d6-25e83111241d
+            partitioner:
+          batch_20250520172632:
+            id: 0f4d6a98-d36a-4e8a-9e0b-a6fc2defc6c2
+            partitioner:
+          batch_20250520172655:
+            id: 2330b311-7ed6-4392-a662-9157149bddde
+            partitioner:
+          batch_20250520173113:
+            id: 958728b0-403d-4766-8a84-3b0c1cd2c72b
+            partitioner:
+          batch_20250520173130:
+            id: c4a9a72f-7e50-4328-9f47-9a62b077ec36
+            partitioner:
+          batch_20250520173150:
+            id: 061d8a00-8a44-48a2-85e6-2f71793a5257
+            partitioner:
+          batch_20250520173209:
+            id: 4798a6f6-c711-4b5f-a764-405d9ee1d789
+            partitioner:
+          batch_20250520173333:
+            id: ff996da3-e96c-4a89-905a-94b248af3b12
+            partitioner:
+          batch_20250520173350:
+            id: 22479fdd-3a23-4df3-a5a0-a29935b50de5
+            partitioner:
+          batch_20250520173409:
+            id: 4683be01-5e4c-4da0-b39b-e504a5a41ff8
+            partitioner:
+          batch_20250520173425:
+            id: 0f0ce796-18e0-43a2-a127-171aedb72f84
+            partitioner:
+          batch_20250520173535:
+            id: 13d3cfa5-a1e3-4b67-b44b-c5511fad2a1f
+            partitioner:
+          batch_20250520173552:
+            id: c4a0c688-5dd4-4b8d-90d4-262e099e4b2a
+            partitioner:
+          batch_20250520173608:
+            id: 8d4e5c5b-ef41-4d2d-ad28-1b0058131cdd
+            partitioner:
+          batch_20250520173623:
+            id: 0e6b751c-80cb-471f-bf6b-705fc7d27876
+            partitioner:
+          batch_20250520174308:
+            id: a587c1c9-4562-403e-82b8-95d772adf999
+            partitioner:
+          batch_20250520174330:
+            id: 828059b8-91f3-4ce3-bdf7-fbffc8a5d693
+            partitioner:
+          batch_20250520174348:
+            id: 347c7a6b-d84e-45b3-9635-35b8603d86e6
+            partitioner:
+          batch_20250520174405:
+            id: faeeee16-76db-4f4e-9d04-6858d0c6e795
+            partitioner:
+          batch_20250520174659:
+            id: b3809473-724d-4cda-bccc-07814db44b84
+            partitioner:
+          batch_20250520174716:
+            id: 1b9962e7-2a9a-462c-b994-5b2f582145a4
+            partitioner:
+          batch_20250520174733:
+            id: b14b009e-7688-4050-8120-8ea6e5e24e33
+            partitioner:
+          batch_20250520174749:
+            id: df3514c5-4951-4613-890a-7d70e3cdc638
+            partitioner:
+          batch_20250520175006:
+            id: 5982035b-36fd-475e-a5f3-76b77c34959c
+            partitioner:
+          batch_20250520175026:
+            id: 0fb6d678-d051-4329-9aab-1ac1a1e0830d
+            partitioner:
+          batch_20250520175046:
+            id: c189f112-cad8-41e4-9cef-09492cd2e11b
+            partitioner:
+          batch_20250520184539:
+            id: 7ad65581-8f16-4a0f-93df-834c2e2993ec
+            partitioner:
+          batch_20250520184559:
+            id: ea9e825e-a098-4b00-90ff-40644ce0aa2a
+            partitioner:
+          batch_20250520184632:
+            id: 13a83a2d-fe3f-486f-a67c-7b7807fead7f
+            partitioner:
+          batch_20250520184649:
+            id: 63652b1e-b93b-4f29-942b-5ec0df6b81f7
+            partitioner:
+          batch_20250520191925:
+            id: cecc7b27-f53f-40c6-bad2-80c07c369091
+            partitioner:
+          batch_20250520191947:
+            id: 3e02df81-ffd4-47c2-a98b-f0a7610a160f
+            partitioner:
+          batch_20250520192007:
+            id: a28a73f8-dc92-4a28-b755-1f6a62f7e1c4
+            partitioner:
+          batch_20250520192022:
+            id: 3042c1ff-1a97-4f2b-8754-4b63cc8e4b95
+            partitioner:
+          batch_20250520193048:
+            id: 0e78ceee-ee21-4d19-834d-a85deb435d67
+            partitioner:
+          batch_20250520193122:
+            id: 64eca344-a07d-4b30-bf7b-0e3ca0172915
+            partitioner:
+          batch_20250520193150:
+            id: 206a19b4-1049-4f48-8644-17bbcd4fc7ed
+            partitioner:
+          batch_20250520193218:
+            id: 42dbc55a-050b-4967-8080-9bf783b34849
+            partitioner:
+          batch_20250520193716:
+            id: f65cf0ce-f948-423b-904b-5e91aa6155df
+            partitioner:
+          batch_20250520193944:
+            id: f40e3351-4240-4aac-8537-ee404e521bbb
+            partitioner:
+          batch_20250520194234:
+            id: 1f016c5d-a0c4-4a1d-a68e-a0776edf8125
+            partitioner:
+          batch_20250520194251:
+            id: ae2ef6ce-283e-4255-906c-0ebaa7731119
+            partitioner:
+          batch_20250520200258:
+            id: 17dce7b0-1b8a-4c07-8208-fb864edb8d8f
+            partitioner:
+          batch_20250520200313:
+            id: a7d73919-61da-4e5b-8737-d49e51386932
+            partitioner:
+          batch_20250520200329:
+            id: 99184729-e627-47f7-9baf-7b633872940c
+            partitioner:
+          batch_20250520200638:
+            id: 9dd62262-60fc-47ac-98d6-ca7347f046d9
+            partitioner:
+          batch_20250520200809:
+            id: 6c53dc26-3ac9-4792-957b-5e896377645f
+            partitioner:
+          batch_20250520201236:
+            id: e04a3ab5-f648-4da7-82d5-df8d481fc5b8
+            partitioner:
+          batch_20250520201335:
+            id: 2812009c-c9d4-43db-8271-4e2efab9bae5
+            partitioner:
+          batch_20250521161857:
+            id: 772e563f-d0d3-48ae-bd8c-8cf8e49a6694
+            partitioner:
+          batch_20250521162322:
+            id: f50453ca-1f85-4f38-b767-7e2c963900d6
+            partitioner:
+  gx_silver:
+    type: spark
+    id: 9092befb-241f-4093-84cd-2e8a71002f93
+    assets:
+      data_asset_silver:
+        type: dataframe
+        id: 56927b37-881e-4f2e-9cec-a88ca0d92205
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250520172558:
+            id: 8b02294d-2f8c-4226-b758-e824e25a5429
+            partitioner:
+          batch_20250520172642:
+            id: d5625cba-66b1-47fb-af47-2ed2f8e41214
+            partitioner:
+          batch_20250520172720:
+            id: af82ccaa-298a-403c-ae51-5d8df3c0e424
+            partitioner:
+          batch_20250520172752:
+            id: c8fe67e7-3764-4515-88ba-387966d85170
+            partitioner:
+          batch_20250520173913:
+            id: 6ea77740-5cf7-42a6-a856-45d08d5d26f9
+            partitioner:
+          batch_20250520173942:
+            id: 22418383-3625-4cc5-96e8-00a642948f87
+            partitioner:
+          batch_20250520174023:
+            id: e26470b4-fe36-41f1-88bd-7ddddf666283
+            partitioner:
+          batch_20250520174227:
+            id: 07eca1ad-4e46-4ec4-a9f8-f8bbb469098e
+            partitioner:
+          batch_20250520174258:
+            id: 7bbd5b0c-3efe-4705-b6bd-21b43c816aea
+            partitioner:
+          batch_20250520174335:
+            id: 2bd9294f-eaaf-4a5a-83c3-1fc232e58a98
+            partitioner:
+          batch_20250520174407:
+            id: 9d30da57-85b2-46d0-9de4-8cf6e90cfb29
+            partitioner:
+          batch_20250520175028:
+            id: 39e2ff74-d056-4bd6-9779-46869821e738
+            partitioner:
+          batch_20250520175103:
+            id: 16056a31-6f91-41d5-9dac-b44a39fa206f
+            partitioner:
+          batch_20250520175133:
+            id: fbdb5210-e72e-40fc-9084-05f2de63b793
+            partitioner:
+          batch_20250520181441:
+            id: fe442666-f478-4660-a54f-6b960ae9fc54
+            partitioner:
+          batch_20250520181555:
+            id: 47af4617-b5c7-4fd6-a9c5-5717a5a2e8ad
+            partitioner:
+          batch_20250520181849:
+            id: bc1292af-83d1-4070-955a-24498d4d23c8
+            partitioner:
+          batch_20250520182152:
+            id: fc7385bf-1ff6-479e-affa-635179aefa76
+            partitioner:
+          batch_20250520183429:
+            id: b945d1d1-41a8-4642-870a-6187972e632f
+            partitioner:
+          batch_20250520183502:
+            id: b9240575-69a2-4ead-94d3-c26f4d9e2f2a
+            partitioner:
+          batch_20250520183535:
+            id: b47be04d-7f39-4357-9e4a-22cef8bc732a
+            partitioner:
+          batch_20250520183601:
+            id: b452e999-85a5-4552-9ff2-527eb8170a99
+            partitioner:
+          batch_20250520183828:
+            id: 9d49ce16-bfec-4a88-95ec-cc90acc2b9b5
+            partitioner:
+          batch_20250520183908:
+            id: f4d8fe67-71b4-4051-a0c0-055183f7f75d
+            partitioner:
+          batch_20250520183934:
+            id: 5c728b3f-4d78-4353-8338-6e25206c7420
+            partitioner:
+          batch_20250520184001:
+            id: d1869684-010e-4b5e-ae5c-fd002e3b0f9c
+            partitioner:
+          batch_20250520184133:
+            id: f590c8a5-fcb5-4dbb-8b64-6bcee29481cb
+            partitioner:
+          batch_20250520184154:
+            id: 419d505a-d20f-4f23-80d5-4e2386d23e2a
+            partitioner:
+          batch_20250520184231:
+            id: ca189f55-04f8-4f86-b12c-d244f4b430c7
+            partitioner:
+          batch_20250520184304:
+            id: b76659e7-3e7a-4e42-9495-d909dbe1c139
+            partitioner:
+          batch_20250520194643:
+            id: d3ca6a02-1954-426a-ad4d-6fb58cd8fbb6
+            partitioner:
+          batch_20250520194706:
+            id: b4c3d73b-fc9c-47ed-b502-238c1e0f591e
+            partitioner:
+          batch_20250520194737:
+            id: 723c4624-bc9a-4acb-a490-6c54f12e5c96
+            partitioner:
+          batch_20250520194807:
+            id: 4c8a9bea-ee90-4e2e-acbe-6f893c9f83d7
+            partitioner:
+          batch_20250520195226:
+            id: c82a1f94-e1ba-475c-afa3-d63edd0eb8e6
+            partitioner:
+          batch_20250520195245:
+            id: 1c7a6a04-86b7-4ffa-b4af-09b73982520d
+            partitioner:
+          batch_20250520195313:
+            id: 9dd0ac70-f475-4f9d-a83b-b45fad4fa8ea
+            partitioner:
+          batch_20250520195337:
+            id: 65b9f9fd-ed92-4bc1-8728-99279291518a
+            partitioner:
+  gx_bronze_inpe:
+    type: spark
+    id: ae18a13e-3d2c-4d3e-a511-117c1b19766c
+    assets:
+      data_asset_bronze_inpe:
+        type: dataframe
+        id: b61cc5c7-c4af-40c4-aa3b-3725165180c3
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250521162749:
+            id: 03fac616-c163-4bfa-990f-0ab1e80c2617
+            partitioner:
+          batch_20250521163603:
+            id: f782d445-b92a-47ee-9e6c-bd8a5235aa5b
+            partitioner:
+          batch_20250521164411:
+            id: 76b5f98b-033b-4dd0-99b6-3f4e281d2026
+            partitioner:
+          batch_20250521212822:
+            id: f3a75858-5bdf-4ef3-9571-75709bb4a90e
+            partitioner:
+          batch_20250522015822:
+            id: fc4edc1f-2145-4dbe-a3c6-aa83c1a46691
+            partitioner:
+          batch_20250522125848:
+            id: ddbc7c15-cc24-40d6-a2fd-79f6f61b1882
+            partitioner:
+          batch_20250522130612:
+            id: f5d8f661-413d-4c2d-a00f-3fd4e2642cb0
+            partitioner:
+          batch_20250522131556:
+            id: 003a9f7a-5cb5-45d6-99f9-4dadb039bb7d
+            partitioner:
+          batch_20250523101324:
+            id: ff44cbd8-e3dd-4d49-abd6-7f447fdc9645
+            partitioner:
+          batch_20250523194329:
+            id: 0e7a3ed9-9812-469b-ae58-54ffe395fa99
+            partitioner:
+          batch_20250523201955:
+            id: ca52c9f4-56fb-49cb-a129-eac486a93eb4
+            partitioner:
+          batch_20250523202434:
+            id: 862a125f-c7b7-4379-9af7-49ef1983c130
+            partitioner:
+          batch_20250523234738:
+            id: e6dbd628-3a0f-477c-9fba-5c1aafee1d84
+            partitioner:
+          batch_20250524000210:
+            id: f0a86878-c481-4cd7-8efa-7a418c1bc8dd
+            partitioner:
+          batch_20250524000235:
+            id: 6c090e89-29d9-4290-afe8-04045b36c698
+            partitioner:
+          batch_20250524000252:
+            id: 495acb49-7704-415b-ad39-49bd94c672ba
+            partitioner:
+          batch_20250524000528:
+            id: 1efdcb9d-a304-456e-87c9-1b22eee9dd9f
+            partitioner:
+          batch_20250524115919:
+            id: 735eedd5-410b-4cec-95de-5ab7ddaec432
+            partitioner:
+          bronze_batch_definition:
+            id: 87ab5340-fb73-4370-83e3-d29c73395301
+            partitioner:
+          batch_20250524121037:
+            id: 8c5196e9-2110-4263-8f5e-5ac6535f3470
+            partitioner:
+          batch_20250524121048:
+            id: a6ff9b26-44a8-4442-a83e-5cc690b7b6aa
+            partitioner:
+          batch_20250524174820:
+            id: 1273b1d7-0a76-45bb-99ee-82b6534b5c07
+            partitioner:
+          batch_20250524175538:
+            id: f5d0ce6a-e66f-4ee4-8fca-8d28a0174418
+            partitioner:
+  gx_silver_weather:
+    type: spark
+    id: 32b653cb-8876-4b74-9bd7-21edd7ac1888
+    assets:
+      data_asset_silver_weather:
+        type: dataframe
+        id: 0ac8a8fe-42f9-461e-a55f-09cf7fa551d4
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524160635:
+            id: 689153a4-9c72-47c3-86bc-644a3691ea25
+            partitioner:
+          batch_20250524175228:
+            id: d41d87fe-4135-493d-8354-3cd161279e99
+            partitioner:
+          batch_20250524184310:
+            id: d6190cc4-fed1-4eb4-8a36-e97518580148
+            partitioner:
+  gx_silver_clima_tempo:
+    type: spark
+    id: 003cb396-b578-4782-92ee-16288cb00ff8
+    assets:
+      data_asset_silver_clima_tempo:
+        type: dataframe
+        id: d7f394c7-30f0-4deb-a6ce-00824db55382
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524160718:
+            id: 2377111e-a139-4deb-8de1-e76d29b3444a
+            partitioner:
+          batch_20250524174929:
+            id: 3546a8b0-f85f-4337-b497-c7148d42652a
+            partitioner:
+          batch_20250524175248:
+            id: a30f78d2-036f-4d3e-8bad-e135f7da6b5a
+            partitioner:
+          batch_20250524183451:
+            id: 13285f45-0a62-427a-b30b-6953c972a053
+            partitioner:
+          batch_20250525014707:
+            id: 04feacec-de7d-4d9e-8d41-83ba261cc62c
+            partitioner:
+  gx_silver_inpe:
+    type: spark
+    id: be41dd2f-afd8-4c2e-bc17-2af5c24f5c14
+    assets:
+      data_asset_silver_inpe:
+        type: dataframe
+        id: c1b9f32f-5dd4-44db-a807-f5726efe40fa
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524161625:
+            id: 37e14680-d529-4700-832d-be79164c72c2
+            partitioner:
+          batch_20250524175144:
+            id: c4a1e034-9d11-42a0-ae54-593fa16fea39
+            partitioner:
+          batch_20250524181440:
+            id: ba02c710-3a7e-48bd-a540-81546ce759a3
+            partitioner:
+          batch_20250524182239:
+            id: d947c5a7-9477-4b3b-92e8-f762408231c9
+            partitioner:
+          batch_20250524182307:
+            id: 807afa69-aa88-4d1c-bfb1-64ea994e83e4
+            partitioner:
+          batch_20250524182433:
+            id: 36b5a91d-f216-4934-9e14-2d91432f5030
+            partitioner:
+          batch_20250524225215:
+            id: 944e80a4-3e7a-4add-b5cc-368741f22475
+            partitioner:
+          batch_20250524230545:
+            id: bd424e90-4d68-46bc-9557-f51c8c134dff
+            partitioner:
+          batch_20250524230643:
+            id: 416f7545-3fca-4db9-9709-939e4e3d8547
+            partitioner:
+          batch_20250524231351:
+            id: 668dc464-ca11-40b0-9813-5d1e0ec7b7e4
+            partitioner:
+          batch_20250524232357:
+            id: 606a31d2-b455-4399-9f7a-d9af0bd84cc6
+            partitioner:
+          batch_20250524232542:
+            id: 20ef853e-bb9e-4a67-b5c8-21082dc4c1f0
+            partitioner:
+          batch_20250524234005:
+            id: e60aeff7-77bd-4684-b1fa-cd59f151f90b
+            partitioner:
+          batch_20250525001633:
+            id: 0186f4b7-954e-40ce-8466-6b031b61778c
+            partitioner:
+          batch_20250525001642:
+            id: 5adb2a30-dc7c-459f-8b64-d008f9252636
+            partitioner:
+          batch_20250525001705:
+            id: 43db0b15-9ff1-43f4-954d-1e234bf8bb1d
+            partitioner:
+          batch_20250525001712:
+            id: fcb79f7a-2968-47fc-8101-71d3c370c033
+            partitioner:
+          batch_20250525001738:
+            id: 1e58c7fc-9689-49d4-9c08-58b27bea3bd5
+            partitioner:
+          batch_20250525033133:
+            id: 3837c0d9-2120-4bf9-8c5d-aa1df5d71eba
+            partitioner:
+          batch_20250525033556:
+            id: 7d89f82d-40c1-4829-8ea5-ff7fef4cdb7f
+            partitioner:
+          batch_20250525033621:
+            id: a8f5013a-e114-47b6-ba98-80e20a6e2994
+            partitioner:
+          batch_20250525033904:
+            id: 5a5b5bb4-2666-4b30-b890-1f669d038b72
+            partitioner:
+          batch_20250525033956:
+            id: 9860eff7-444b-4218-8c70-9fa8e06e5a50
+            partitioner:
+          batch_20250525035614:
+            id: 39e6340d-7d56-46b1-80d1-6fe3b94bb000
+            partitioner:
+          batch_20250525040124:
+            id: 3b9b510f-d1be-44a1-a770-bbefd96fdb72
+            partitioner:
+          batch_20250525045658:
+            id: 6867d43c-725b-4639-9469-b62f290bd0d8
+            partitioner:
+          batch_20250525045740:
+            id: 6491bad0-63ae-43b0-8c36-47733d719c76
+            partitioner:
+          batch_20250525050030:
+            id: f7907ef2-7fd0-4e10-a3d5-26797fa7b6fd
+            partitioner:
+          batch_20250525050316:
+            id: c052c693-6343-44bf-9163-466775f06602
+            partitioner:
+  gx_bronze_clima_tempo:
+    type: spark
+    id: 3bf68408-bbca-48ad-982a-e6a39f31aefb
+    assets:
+      data_asset_bronze_clima_tempo:
+        type: dataframe
+        id: 7330375c-fb0e-4a0f-95de-a8fc6900243a
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524173024:
+            id: c9f35f62-4e00-4aa6-a985-7beaa1604e98
+            partitioner:
+          batch_20250524173416:
+            id: 63101075-7b11-45de-a089-db2726b82b0d
+            partitioner:
+          batch_20250524173647:
+            id: b3f15955-7b32-41cb-b3d9-1ba883efd772
+            partitioner:
+          batch_20250524174949:
+            id: 09671a15-1450-4f72-be39-be794dfbd10f
+            partitioner:
+          batch_20250524175543:
+            id: 75a07b0d-1039-4652-98e0-93f2ea3f4d3d
+            partitioner:
+  gx_bronze_open_weather_map:
+    type: spark
+    id: ee010ade-8f33-4b0a-90b6-574786b996ef
+    assets:
+      data_asset_bronze_open_weather_map:
+        type: dataframe
+        id: 0097363f-153d-4ff7-ab50-5c7474d94e1d
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524174912:
+            id: 8f4bc410-0a13-4697-b427-d2fc4493b84c
+            partitioner:
+          batch_20250524175515:
+            id: 11a5e015-d93f-47bd-8948-f8de87ccb96f
+            partitioner:
+          batch_20250524175729:
+            id: 8a40a752-912f-43aa-8d9b-a549b696bf84
+            partitioner:
+  gx_silver_weather_api:
+    type: spark
+    id: b5f062cd-cfd9-47f1-8bf4-d350fa321719
+    assets:
+      data_asset_silver_weather_api:
+        type: dataframe
+        id: 91b3ab21-dc08-4a84-a694-39bd3e36d4bb
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524175158:
+            id: eb039f1e-ac57-488d-bda3-b4deacf207ff
+            partitioner:
+          batch_20250524185132:
+            id: 04219416-3495-4482-a884-5711291726a7
+            partitioner:
+  gx_silver_open_weather_api:
+    type: spark
+    id: 359fafbe-42d2-4ead-9361-08353ab2f25d
+    assets:
+      data_asset_silver_open_weather_api:
+        type: dataframe
+        id: 5f0c6d58-bb69-4663-82ee-40d3258846c2
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524175221:
+            id: e578c569-8c61-4d99-a796-7863eab74f5f
+            partitioner:
+          batch_20250524183900:
+            id: 53e38f05-7e55-4d5a-b35c-0a1abf174f00
+            partitioner:
+  gx_bronze_weather:
+    type: spark
+    id: 7e779d62-2838-44bd-ad21-37dae7d379bd
+    assets:
+      data_asset_bronze_weather:
+        type: dataframe
+        id: 787ce907-9171-4e88-b766-36b59de21d00
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524175525:
+            id: dc7864cc-3006-460c-b5dd-871850787e2e
+            partitioner:
+  gx_bronze_weather_api:
+    type: spark
+    id: 9bd0c7a6-0f7c-45e9-9d06-0a69c2026f60
+    assets:
+      data_asset_bronze_weather_api:
+        type: dataframe
+        id: eedbdf16-446b-45f7-b57f-b6e22131b07f
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524175529:
+            id: a9070f3f-03db-4be6-9b82-313d9ad5768f
+            partitioner:
+  gx_bronze_chuvas_criticas:
+    type: spark
+    id: 03abba68-fe02-48c6-ac8b-558eb965fc1a
+    assets:
+      data_asset_bronze_chuvas_criticas:
+        type: dataframe
+        id: 9e62faa7-169f-4c10-899e-b6e7ef6f54a6
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524194527:
+            id: 5ea711fe-dc2c-415f-b186-4f712615bed2
+            partitioner:
+  gx_silver_chuvas_criticas:
+    type: spark
+    id: 0006ca4f-4d4f-452a-8dcd-1e3f7a05d76d
+    assets:
+      data_asset_silver_chuvas_criticas:
+        type: dataframe
+        id: ff3e5212-8b05-4746-ac83-6a8c6508a0fc
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524195325:
+            id: 636e4bfb-ed26-4794-8070-87c32b0f2525
+            partitioner:
+          batch_20250525052947:
+            id: 89588454-3499-478c-88ff-0b619dce09a8
+            partitioner:
+  gx_bronze_grupo01.bronze.inpe:
+    type: spark
+    id: 616e5bfb-7115-41ec-99c9-6221289b6f79
+    assets:
+      data_asset_bronze_grupo01.bronze.inpe:
+        type: dataframe
+        id: a6f97da1-8e8a-4a62-bb53-8f33ff0c5afe
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524214655:
+            id: e07be5fa-721a-44f8-a338-5c407ac86bd4
+            partitioner:
+          batch_20250524215127:
+            id: bd90add0-16cb-4fac-bbde-95c297c72542
+            partitioner:
+          batch_20250524215402:
+            id: 955ba857-0291-43b3-b080-8508b3842083
+            partitioner:
+  gx_bronze_grupo01.bronze.chuvas_criticas:
+    type: spark
+    id: 37714b94-781c-49e2-b6bf-0fbf54681171
+    assets:
+      data_asset_bronze_grupo01.bronze.chuvas_criticas:
+        type: dataframe
+        id: 472fca0f-e399-418f-9fbf-d178ffc94db5
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524220052:
+            id: 9bd7be82-a1bd-456f-8cce-a16da1519838
+            partitioner:
+          batch_20250524220858:
+            id: 99329818-84d0-458d-8b2d-034d1517dd7b
+            partitioner:
+  gx_bronze_grupo01.bronze.open_weather_map:
+    type: spark
+    id: 8f6faff4-da9f-4dcc-8c1e-96244c9e35b5
+    assets:
+      data_asset_bronze_grupo01.bronze.open_weather_map:
+        type: dataframe
+        id: fd9a20d5-4573-4ee6-8a2a-db09d8b3f9a9
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524221101:
+            id: 5474371d-e996-46f6-a098-fd9800714060
+            partitioner:
+          batch_20250524221653:
+            id: 2a5b7c5e-67f6-4cf1-ab85-8b20311d2669
+            partitioner:
+  gx_bronze_grupo01.bronze.weather:
+    type: spark
+    id: 9307f804-16bd-4abc-b83a-fdec334fa263
+    assets:
+      data_asset_bronze_grupo01.bronze.weather:
+        type: dataframe
+        id: 5386f0cb-598d-453e-957b-15d10249d3ac
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524221856:
+            id: 943f7f12-85f0-4554-8735-181c2273de9b
+            partitioner:
+  gx_bronze_grupo01.bronze.weather_api:
+    type: spark
+    id: adbb0c04-9467-4cd6-8f67-91958960777d
+    assets:
+      data_asset_bronze_grupo01.bronze.weather_api:
+        type: dataframe
+        id: a63d4d42-7f79-49a9-a89d-d2b2d8220ac8
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524222237:
+            id: f332fb75-b5b2-42b5-acec-7de41a9ec36b
+            partitioner:
+  gx_bronze_grupo01.bronze.clima_tempo:
+    type: spark
+    id: 75631577-f926-454e-91f4-ff2e53a9adad
+    assets:
+      data_asset_bronze_grupo01.bronze.clima_tempo:
+        type: dataframe
+        id: 41a37dde-93de-4886-844a-3f7f4a7b1c73
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250524222314:
+            id: 325a7bcf-a12c-42bb-af52-e6bae679111c
+            partitioner:
+  gx_silver_grupo01.silver.inpe:
+    type: spark
+    id: feb2ec06-9c24-4d47-9b39-1cea884f6ade
+    assets:
+      data_asset_silver_grupo01.silver.inpe:
+        type: dataframe
+        id: 0cc9c64c-add0-448c-86ab-b0d2f63f37b4
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525002623:
+            id: df89fbf0-a1c7-48c0-8a59-2ebf9f06b3e6
+            partitioner:
+          batch_20250525002839:
+            id: 9267a3a0-4e3a-4b04-81d7-e8fd0248fc79
+            partitioner:
+          batch_20250525025020:
+            id: fb8a3fee-fe0c-4541-bcc1-1584eab21818
+            partitioner:
+          batch_20250525030336:
+            id: cca5fd3a-df8d-4f2d-9e0d-9de4c1027270
+            partitioner:
+          batch_20250525031702:
+            id: 7db7606a-a5ce-4957-b927-ad8780ce863f
+            partitioner:
+          batch_20250525032058:
+            id: 4d858778-950b-4853-9eb7-1e4185ee1634
+            partitioner:
+          batch_20250525032751:
+            id: 09f9ac30-0054-4a87-a5de-c88bba3b1196
+            partitioner:
+          batch_20250525040537:
+            id: 1497c91b-e1ab-4069-a222-294d7295ff24
+            partitioner:
+          batch_20250525040637:
+            id: a2950e5a-d02d-4480-aabb-1f668c02a1f0
+            partitioner:
+          batch_20250525040802:
+            id: 7bba8cc1-35bf-47af-937d-d6818027442d
+            partitioner:
+          batch_20250525040923:
+            id: 9c817a3f-28b5-4268-812e-8834917a41c0
+            partitioner:
+          batch_20250525042833:
+            id: 6f4c7194-4940-45b0-8969-75f0122e85b6
+            partitioner:
+          batch_20250525043126:
+            id: 3aeb267e-e364-41ad-91e3-11597d62d8ad
+            partitioner:
+          batch_20250525043418:
+            id: f21cfd89-72a0-42e9-b00b-c4c70a7eaaad
+            partitioner:
+          batch_20250525043459:
+            id: ce08c3f4-f7e6-44f5-b433-0d22974dc3a9
+            partitioner:
+          batch_20250525043808:
+            id: dbb75951-2bca-4570-a99f-e541ea307056
+            partitioner:
+          batch_20250525044509:
+            id: f776f5ea-e44a-48f4-9b46-0d211922a7b0
+            partitioner:
+          batch_20250525044926:
+            id: 05929166-a8c6-44d4-8a61-cf30371cf303
+            partitioner:
+          batch_20250525045317:
+            id: c42b5b33-ee88-4bfa-b824-1425bf0e9f7f
+            partitioner:
+          batch_20250525050235:
+            id: 53c8450b-efb1-4ae5-8b4a-698538040bc6
+            partitioner:
+          batch_20250525050435:
+            id: 64ad36fe-f0b4-4f05-94cc-9335d5dfd614
+            partitioner:
+          batch_20250525050807:
+            id: aeb23f74-5e8b-446d-a93c-3694b7dd16d4
+            partitioner:
+          batch_20250525050941:
+            id: 316e2f3c-4442-4fca-96e4-5aa0a7002b6f
+            partitioner:
+          batch_20250525152412:
+            id: 57cfe35e-ede2-42be-a939-59a3d1243fec
+            partitioner:
+          batch_20250525160320:
+            id: 0ca4a923-094f-4f7c-85af-0fcc699ba8b4
+            partitioner:
+          batch_20250525160639:
+            id: b92801e1-11bd-473c-a65e-cb86e15ce0e6
+            partitioner:
+          batch_20250525160746:
+            id: dab7a8a7-65ed-4733-8ded-dc299135060d
+            partitioner:
+          batch_20250525160910:
+            id: 1d81160b-cb3b-4a82-817f-0f377241b6de
+            partitioner:
+          batch_20250525183428:
+            id: f8da6273-b527-4593-9399-56c801e3450c
+            partitioner:
+          batch_20250525201541:
+            id: 2e69cfcd-80b6-422c-88af-b6d888de20d8
+            partitioner:
+          batch_20250525202339:
+            id: 311cc312-e7ca-4fe1-bbb0-0c153260ac8a
+            partitioner:
+          batch_20250525205928:
+            id: 65e6ed94-d353-4bcd-976a-c83b8452d501
+            partitioner:
+          batch_20250525210235:
+            id: e98992cb-5977-4f23-a410-6e297c50affa
+            partitioner:
+          batch_20250525212013:
+            id: 173b3f7b-1c9a-480e-a9db-cc4c95e317e5
+            partitioner:
+          batch_20250525213155:
+            id: 8b9cab82-58d8-4253-8fb4-43005a672481
+            partitioner:
+          batch_20250525213723:
+            id: 28601ed2-7905-45c9-b1bf-954b0e13335c
+            partitioner:
+          batch_20250526130406:
+            id: 600a2645-a3df-46df-be36-656023a3ffec
+            partitioner:
+          batch_20250526131615:
+            id: 2715a133-7e10-440e-98ea-18fdf42aee77
+            partitioner:
+          batch_20250526141828:
+            id: cf7594e9-729a-4210-90ae-cdc2e088b9a2
+            partitioner:
+          batch_20250527101445:
+            id: 1ac89dde-616c-4dde-9689-8030dd01b9b4
+            partitioner:
+  gx_silver_grupo01.silver.clima_tempo:
+    type: spark
+    id: ba757cbb-be56-4f90-8254-0b6ece78b131
+    assets:
+      data_asset_silver_grupo01.silver.clima_tempo:
+        type: dataframe
+        id: eae28935-a28f-47ae-b57d-56c8480d05ce
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525051248:
+            id: 12ee3782-f0ee-4dfa-a2e9-c5a2f1bfe6f1
+            partitioner:
+          batch_20250525052022:
+            id: 07b14d8f-2f35-4eab-810a-7601da3c01f9
+            partitioner:
+          batch_20250525183406:
+            id: 4c0fe6c6-6743-4799-8f1a-bd70c0210547
+            partitioner:
+          batch_20250525201533:
+            id: a7fb83ed-63f8-4a6e-bc22-b270bc5d6a7c
+            partitioner:
+          batch_20250525202337:
+            id: 8fdb9623-b8dd-4885-8eaf-374b32f1ee19
+            partitioner:
+          batch_20250525204759:
+            id: bf835893-dd26-4d2f-ac7e-ffa43ea3f6e1
+            partitioner:
+          batch_20250525205922:
+            id: 22c5ee11-c39f-42af-8529-b2aa8e2d7842
+            partitioner:
+          batch_20250525210104:
+            id: a2a38586-852a-4103-8a13-9a7b528f872c
+            partitioner:
+          batch_20250525211139:
+            id: 36c1fb04-fdc3-48fb-961d-6c296a587af5
+            partitioner:
+          batch_20250525211955:
+            id: d873e944-a96b-405c-ae27-e8218e979749
+            partitioner:
+          batch_20250525222103:
+            id: 232d5fc9-6a44-441f-b22f-ae7dd6eb1da4
+            partitioner:
+          batch_20250526002718:
+            id: b2244180-f5d2-4b09-8be5-71197e52b0b6
+            partitioner:
+          batch_20250526004746:
+            id: 7136508c-b77a-498f-b463-46bdabfe389d
+            partitioner:
+          batch_20250526101442:
+            id: 451a361b-8d3f-478c-8cb6-2ea306db7171
+            partitioner:
+          batch_20250526131613:
+            id: 9df3cbbd-094c-40b4-84cb-b3635588d193
+            partitioner:
+          batch_20250526141505:
+            id: fe041d1d-0d9c-4008-99ed-d04837392821
+            partitioner:
+          batch_20250526141822:
+            id: 6411bea3-703e-4774-b47c-e49b0d591277
+            partitioner:
+          batch_20250526183214:
+            id: 75266174-fd42-4ae6-a08e-8aef738ef43e
+            partitioner:
+          batch_20250526183459:
+            id: f814a41d-d423-4791-8fdc-092034926686
+            partitioner:
+  gx_silver_grupo01.silver.weather_api:
+    type: spark
+    id: 64453848-72e2-4a06-a83c-5e5344562be1
+    assets:
+      data_asset_silver_grupo01.silver.weather_api:
+        type: dataframe
+        id: 63fba3be-e9cd-4477-92ac-e8a9a35033d7
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525052132:
+            id: 5516b938-2c57-45d4-b891-d084d8ec874a
+            partitioner:
+          batch_20250525201516:
+            id: 4d8acb1a-fff3-4197-aecc-cea6edcb2472
+            partitioner:
+          batch_20250525202341:
+            id: 609ce017-3704-4b0d-a597-296aeda160c6
+            partitioner:
+          batch_20250525204724:
+            id: 4ecb6e29-2787-48c1-84b9-55774a8138ee
+            partitioner:
+          batch_20250525210215:
+            id: 5dadc64c-1d26-4305-8494-81bdc6cfbebd
+            partitioner:
+          batch_20250525211131:
+            id: 6f98bafe-d0ff-4289-9f2d-6e7856da22f5
+            partitioner:
+          batch_20250525213911:
+            id: 833a79ce-08b4-4fb8-990e-9eb175b4a4e7
+            partitioner:
+          batch_20250525222018:
+            id: c1144116-3145-45f6-84c8-fee92f214974
+            partitioner:
+          batch_20250526003026:
+            id: c5468f69-27fd-4e64-a743-9e5fd3283c6d
+            partitioner:
+          batch_20250526004954:
+            id: e3c749fc-7f1f-4c96-8a3d-c1ed2875273d
+            partitioner:
+          batch_20250526131554:
+            id: ba963211-de91-452f-8c84-8c96bb0e765c
+            partitioner:
+          batch_20250526141740:
+            id: 05523c22-4da5-4952-9ec8-0a2ced06a5b3
+            partitioner:
+          batch_20250526183437:
+            id: a77bdab8-65f7-4c86-baeb-d82990b62c2e
+            partitioner:
+          batch_20250527101357:
+            id: b14d2b46-2814-4d6b-8613-b666310cbc9a
+            partitioner:
+  gx_silver_grupo01.silver.weather:
+    type: spark
+    id: e3e5bb6c-2b8c-4f57-805f-31653f4687fc
+    assets:
+      data_asset_silver_grupo01.silver.weather:
+        type: dataframe
+        id: 224085fb-f267-4f3c-a0e3-c16eea590539
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525052318:
+            id: 7e1ef69b-0957-4064-bd22-add25feb4052
+            partitioner:
+          batch_20250525201549:
+            id: eb75ba14-8dba-4fe2-b256-ae9ce64251c2
+            partitioner:
+          batch_20250525210021:
+            id: 945e84aa-1119-49c1-8139-cc56f670e764
+            partitioner:
+          batch_20250525211042:
+            id: c4384a21-6ce6-48ac-8d29-03d4a5fe21a0
+            partitioner:
+          batch_20250525211944:
+            id: 45e1754f-4897-494d-9c00-023648ed40f8
+            partitioner:
+          batch_20250525213526:
+            id: f50c68ac-128d-4acb-b588-d25cbabd7b43
+            partitioner:
+          batch_20250525222044:
+            id: 6a5c99fc-ee47-45f6-857a-21a1ecf254be
+            partitioner:
+          batch_20250526003033:
+            id: 7a410df9-949c-4920-94d3-0a58d336223b
+            partitioner:
+          batch_20250526005039:
+            id: 483b4683-0d46-4712-81a3-0b6c56517643
+            partitioner:
+          batch_20250526101419:
+            id: ba7d7722-83b8-483b-bd66-e31094546840
+            partitioner:
+          batch_20250526130334:
+            id: 9efc3044-4e35-432f-8c5d-a28dca0235d9
+            partitioner:
+          batch_20250526131603:
+            id: d98f7ac6-170e-4b76-ba96-8ab0f27ea894
+            partitioner:
+          batch_20250526141755:
+            id: 9def6882-594a-46cd-bb9d-57c08626416c
+            partitioner:
+          batch_20250526183511:
+            id: 3fb250d6-f19f-49fa-adf3-98802df27c78
+            partitioner:
+          batch_20250527101351:
+            id: 9485c269-7aa4-46ff-9c89-5b725d3bca30
+            partitioner:
+  gx_silver_grupo01.bronze.open_weather_map:
+    type: spark
+    id: 3f7f73df-c308-4377-9906-49cb727bd226
+    assets:
+      data_asset_silver_grupo01.bronze.open_weather_map:
+        type: dataframe
+        id: aaad8c83-72a9-4873-8993-f8b559255d20
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525052613:
+            id: 7cad224c-97df-42dc-8b72-10aff75ceaad
+            partitioner:
+          batch_20250525204838:
+            id: e9eeb181-4f5a-4407-a204-f4763c12bbbe
+            partitioner:
+          batch_20250525205040:
+            id: 35eb82e9-20ca-475c-9826-d881e5034b44
+            partitioner:
+          batch_20250525205513:
+            id: 702bb54c-9e76-484a-bd67-b2b93475713b
+            partitioner:
+          batch_20250525205734:
+            id: 2f5f5e93-e9aa-4fee-9d7a-3039db86dff5
+            partitioner:
+          batch_20250525210143:
+            id: 99f9d82f-b7b3-4ecb-b838-edfe0932e751
+            partitioner:
+          batch_20250525210515:
+            id: a66062c6-94cc-4f4c-bcaa-f22dd1ea974c
+            partitioner:
+          batch_20250525210633:
+            id: 8a7df1bb-1edf-4935-b16d-1de52e9de739
+            partitioner:
+          batch_20250525210704:
+            id: 4d06227e-ea4e-4153-86f6-b564f3208e94
+            partitioner:
+          batch_20250526002658:
+            id: 49806a0b-2cac-4c8c-824f-e5cf5353a18d
+            partitioner:
+          batch_20250526004654:
+            id: bd1a7c79-4061-4931-9828-794b6ac3d79f
+            partitioner:
+          batch_20250526141411:
+            id: 193e9f54-ceae-4d51-bb20-9d53990b050d
+            partitioner:
+          batch_20250526183119:
+            id: 842f8412-c36f-41b7-9807-f6be2e202885
+            partitioner:
+  gx_silver_grupo01.silver.open_weather_map:
+    type: spark
+    id: 42a95ff8-ce90-48b3-be00-984fca11298f
+    assets:
+      data_asset_silver_grupo01.silver.open_weather_map:
+        type: dataframe
+        id: abbff501-4494-45ce-8516-e2a15599d151
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525052810:
+            id: ba0908dd-a84d-4146-a3be-30741398e2f1
+            partitioner:
+          batch_20250525201459:
+            id: cdf7165a-edbc-4a50-b10a-139267b051e3
+            partitioner:
+          batch_20250525211921:
+            id: 197529ff-1655-41f4-8869-0e39558646ca
+            partitioner:
+          batch_20250525213121:
+            id: a5f59555-5d0e-44d2-bf05-8d0639c57eec
+            partitioner:
+          batch_20250525222000:
+            id: 95ac6102-df85-4473-b7a9-85141eb880bb
+            partitioner:
+          batch_20250526004947:
+            id: 8b18a3c4-6ca5-4c25-b2f6-0134237dad00
+            partitioner:
+          batch_20250526101411:
+            id: 0e6dadcb-c822-44b0-bd13-2aa08542ab62
+            partitioner:
+          batch_20250526130300:
+            id: 313c024a-0ca6-4445-a1c2-f255a543fd1a
+            partitioner:
+          batch_20250526141703:
+            id: 90b5cf10-bc2f-4a07-a593-bb46a0bf57ad
+            partitioner:
+          batch_20250526183410:
+            id: 766d64e0-fbd2-4739-a9a4-d3a8e3065d14
+            partitioner:
+  gx_silver_['inpe']:
+    type: spark
+    id: f2eda28e-c2d1-4f97-97f7-06dcb25a966b
+    assets:
+      data_asset_silver_['inpe']:
+        type: dataframe
+        id: e1c7936e-5961-473d-ba40-d094c1f88a83
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525154129:
+            id: a0e105a2-951d-4fa6-a758-a54db6bd3630
+            partitioner:
+          batch_20250525154334:
+            id: 43fb943f-f2ae-432b-8248-8f8d9d5d5610
+            partitioner:
+          batch_20250525154800:
+            id: e7cf07fa-a0a6-430e-abd0-b5aacc50979c
+            partitioner:
+          batch_20250525155121:
+            id: 3898ed2a-c25e-4d5b-91a8-02d5b279231f
+            partitioner:
+          batch_20250525155411:
+            id: 832cff86-8858-4f60-9ad6-b4024c6aa872
+            partitioner:
+          batch_20250525155530:
+            id: d6624441-51df-4e1b-8340-5cd624539f1d
+            partitioner:
+  gx_silver_grupo01.silver.chuvas_criticas:
+    type: spark
+    id: 68f2f349-eb38-46f2-965f-bc0c94105cbc
+    assets:
+      data_asset_silver_grupo01.silver.chuvas_criticas:
+        type: dataframe
+        id: 6cb92b7d-a360-4142-8d8c-73af68354f1d
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525161855:
+            id: bdc5a766-9d22-4e81-b404-a09d5910a30e
+            partitioner:
+          batch_20250525162032:
+            id: 5c14b2fc-a427-4ca3-8194-b0d058de5069
+            partitioner:
+          batch_20250525183304:
+            id: 64aaeaee-cc12-492d-bf69-08e1a274ee40
+            partitioner:
+          batch_20250525202423:
+            id: c383fb07-14c2-4259-86de-54be48d2929b
+            partitioner:
+          batch_20250525204640:
+            id: 5aa2ca48-9e48-4fec-8b8b-b3226cab4a0a
+            partitioner:
+          batch_20250525210200:
+            id: cfe0f3ec-1459-43e3-af98-3c5b939d89c3
+            partitioner:
+          batch_20250525210958:
+            id: 81ca0a2d-251a-4a5d-8bc3-faaabac7f2cd
+            partitioner:
+          batch_20250525211827:
+            id: c3289d24-3cb0-4680-928f-4d2f0aa2c7f8
+            partitioner:
+          batch_20250525213022:
+            id: d4098688-bab7-40c7-83d0-f4cb733c95df
+            partitioner:
+          batch_20250525215956:
+            id: b6a3b737-24cf-4e96-95bb-f243c3b20856
+            partitioner:
+          batch_20250525220055:
+            id: 580f2fa6-3c83-461f-90c2-d522c15da4fc
+            partitioner:
+          batch_20250525220255:
+            id: 3c2361d3-3d66-4741-9b7d-5bf8088ef96f
+            partitioner:
+          batch_20250525221840:
+            id: 90c4ff01-effe-40ed-8e2d-430b99465a8b
+            partitioner:
+          batch_20250526002912:
+            id: b5e35ca0-715d-44fd-97c4-fcf0d1965f74
+            partitioner:
+          batch_20250526004821:
+            id: f9cabbb6-61ad-48a2-9b0c-77c4f19191da
+            partitioner:
+          batch_20250526101326:
+            id: f03a1f93-56cd-4af7-9d3a-e1f08355e02c
+            partitioner:
+          batch_20250526124647:
+            id: c367bf01-deac-452a-babe-be2c82731ada
+            partitioner:
+          batch_20250526125121:
+            id: a8aae7c4-f009-4ac4-96aa-cf960e9741eb
+            partitioner:
+          batch_20250526130155:
+            id: 2506aa49-f2a0-4e48-badd-2453a8b2696d
+            partitioner:
+          batch_20250526131435:
+            id: 15c94494-bcf7-44af-9242-0cbfde540623
+            partitioner:
+          batch_20250526141601:
+            id: 35046909-d70d-4fcf-8beb-e1936c873545
+            partitioner:
+          batch_20250526183319:
+            id: bd05ec82-80c5-4829-be33-59592bd6b330
+            partitioner:
+          batch_20250527101305:
+            id: 4fe353f6-8fdc-4dfd-8a01-c3c346cbe694
+            partitioner:
+  gx_silver_grupo01.bronze.chuvas_criticas:
+    type: spark
+    id: 2691691c-b075-4de4-9241-25885fbbd7ee
+    assets:
+      data_asset_silver_grupo01.bronze.chuvas_criticas:
+        type: dataframe
+        id: 8595d0e2-fd98-47f9-b383-7571b02579e7
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525182837:
+            id: be977612-990f-422d-8ab9-67a0d95fa48e
+            partitioner:
+          batch_20250525183012:
+            id: 8c3d678b-412b-440e-ac33-00f7bfd02830
+            partitioner:
+          batch_20250525200324:
+            id: b9d659fe-9134-45c7-94fc-c3f8d8e7bff0
+            partitioner:
+          batch_20250525201112:
+            id: d32f0d7b-5a33-4c10-a397-b264636496cb
+            partitioner:
+          batch_20250525203653:
+            id: 984326c1-e424-4948-8a49-3b738da6e8eb
+            partitioner:
+          batch_20250525204440:
+            id: 9e143458-37ed-48b1-8d41-4e423333ff82
+            partitioner:
+          batch_20250525204914:
+            id: 54bec333-f9fa-4e73-a94c-e01a3a50bf0f
+            partitioner:
+          batch_20250525205226:
+            id: 5e971195-d57a-43f3-bcd5-5d335780f6f7
+            partitioner:
+          batch_20250525205945:
+            id: 0c1c6df4-b72e-4dad-9e36-a175904f3954
+            partitioner:
+          batch_20250525210119:
+            id: 44f6f887-70c7-42a5-952c-0e186831edcb
+            partitioner:
+          batch_20250525210256:
+            id: 380f4ebf-658c-4c95-a1df-3285ef42e41e
+            partitioner:
+          batch_20250525211616:
+            id: 47e90405-cb95-4dff-b57a-ddb12f9d90c3
+            partitioner:
+          batch_20250525212828:
+            id: 55939856-24b8-40bb-9d98-aa6ff9913edf
+            partitioner:
+          batch_20250525220358:
+            id: 8102b6af-5082-4ddd-9725-6905fbe0f053
+            partitioner:
+          batch_20250525220454:
+            id: 574a5c69-43f6-403f-8ca7-2dadbae4818a
+            partitioner:
+          batch_20250525221635:
+            id: 9e7af640-c60e-4fa2-a9e8-c6ba2979269a
+            partitioner:
+          batch_20250526002601:
+            id: 730e5dfc-6697-4c02-bbf2-d3abcbc935e5
+            partitioner:
+          batch_20250526004556:
+            id: fa519730-67e8-4fec-a878-828316ed730f
+            partitioner:
+          batch_20250526101109:
+            id: 7b838f84-bdac-461c-93c1-8d37dfa8cfb2
+            partitioner:
+          batch_20250526124452:
+            id: c0e6c40a-45fc-4b0a-bf42-1aa564f58e47
+            partitioner:
+          batch_20250526124927:
+            id: 465554a2-8b92-493d-9e33-8b78a5ea869c
+            partitioner:
+          batch_20250526125950:
+            id: 201e226e-e0e4-4220-a9f2-0e964de7ccb0
+            partitioner:
+          batch_20250526131206:
+            id: e13e0167-4f33-4fdb-8cd4-ea3a51dc0c4e
+            partitioner:
+          batch_20250526141310:
+            id: 0974babb-1352-4629-981d-005545910ad4
+            partitioner:
+          batch_20250526183026:
+            id: 9e96fd76-ffd4-49ec-af12-6659e46e30f7
+            partitioner:
+          batch_20250527101059:
+            id: e39b12ae-6cce-41a9-84fe-21b13bb8f0e1
+            partitioner:
+  gx_silver_grupo01.bronze.weather_api:
+    type: spark
+    id: 74441056-95ff-42a2-9b47-f0dbbe3db5ad
+    assets:
+      data_asset_silver_grupo01.bronze.weather_api:
+        type: dataframe
+        id: 100c38df-dbfe-45bc-98c9-382d5935b7ec
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525183027:
+            id: ec179f22-eab3-4821-929a-81f74190dc8b
+            partitioner:
+          batch_20250525183232:
+            id: cbf7b98a-71c8-41d0-a7d4-79b8a9179acd
+            partitioner:
+          batch_20250525200426:
+            id: ac2593a9-c77e-467e-80ca-7bd998a2bf2a
+            partitioner:
+          batch_20250525201212:
+            id: 887b719c-c873-49e3-ad63-144b23c2fe39
+            partitioner:
+          batch_20250525201246:
+            id: 51119c31-f915-4a15-aad0-ee4f6126f5e5
+            partitioner:
+          batch_20250525204526:
+            id: 717aa8d6-552e-4d46-b585-337bd8e5655c
+            partitioner:
+          batch_20250525204605:
+            id: d2fa9f72-adc2-4b79-8bb5-8d25fa0880a6
+            partitioner:
+          batch_20250525205843:
+            id: 00725774-4f51-4716-a3ce-661098646b64
+            partitioner:
+          batch_20250525210859:
+            id: d410567e-3b43-4984-9a39-df69b9741676
+            partitioner:
+          batch_20250525211746:
+            id: abf076f2-dabb-4d8c-a747-ed0ca7a43a6a
+            partitioner:
+          batch_20250525212459:
+            id: 8d9c3cf8-c3b4-4b78-ba88-11d390d44253
+            partitioner:
+          batch_20250525213030:
+            id: 83e4910c-5810-4f6b-96c1-12d809d95252
+            partitioner:
+          batch_20250525221748:
+            id: dc996485-d413-41ec-bab6-2db91b3d1c2d
+            partitioner:
+          batch_20250526101240:
+            id: 082d27a4-eacd-4061-bb44-344449afbbb2
+            partitioner:
+          batch_20250526124534:
+            id: bdeb9a6a-27d3-462f-b9bf-5f231784ba45
+            partitioner:
+          batch_20250526125012:
+            id: e1d69c3b-229b-4720-804c-9fbabe6493da
+            partitioner:
+          batch_20250526125047:
+            id: 5e983e03-ed31-4a0b-8c26-430a6904b6b9
+            partitioner:
+          batch_20250526130044:
+            id: a1afeeec-7538-4166-a200-3295f14ba9c8
+            partitioner:
+          batch_20250526131304:
+            id: 85c78047-0fe0-4ab8-9a2c-586e1554eb35
+            partitioner:
+          batch_20250526141428:
+            id: 310d7f5f-e050-40e6-9837-39ddd1562e20
+            partitioner:
+          batch_20250526183127:
+            id: 4eb20a9e-deca-434f-8b88-78a7c4989aac
+            partitioner:
+          batch_20250527101131:
+            id: 6d620933-3b20-47f3-ab2b-b845f9ceea84
+            partitioner:
+  gx_silver_grupo01.bronze.inpe:
+    type: spark
+    id: 71cf3800-c193-4e47-b1f9-8b103fdfd28f
+    assets:
+      data_asset_silver_grupo01.bronze.inpe:
+        type: dataframe
+        id: c61749c9-bcfa-4b3e-88fa-6742dd411b5f
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525183146:
+            id: 4a816a56-6a64-41c8-9f2d-1f287cbd6875
+            partitioner:
+          batch_20250525190439:
+            id: c33ecf03-7108-492b-812f-53c4cbd67737
+            partitioner:
+          batch_20250525190545:
+            id: dec896c0-dd09-4057-a1ad-1e859462e68a
+            partitioner:
+          batch_20250525191230:
+            id: be295be9-d150-440f-8f72-636562a1d758
+            partitioner:
+          batch_20250525191549:
+            id: 1f3909ae-7ac7-49c0-96a3-46da68a11eb0
+            partitioner:
+          batch_20250525192518:
+            id: 7da9eadf-0fba-423e-9163-ea6eaafa62e1
+            partitioner:
+          batch_20250525193548:
+            id: f64c2ec3-7a5b-4b9e-ac19-67ded49e2e16
+            partitioner:
+          batch_20250525193834:
+            id: 930a7c60-f2ab-4b0d-ac03-ad92b78f81e5
+            partitioner:
+          batch_20250525193925:
+            id: f2486368-a5cb-4b7b-868a-3564baa8f891
+            partitioner:
+          batch_20250525194219:
+            id: fd04856d-f431-49a9-89c9-b958517fc7e6
+            partitioner:
+          batch_20250525194608:
+            id: bfa154c8-b428-4e63-8314-e1fc507f59d1
+            partitioner:
+          batch_20250525194838:
+            id: b141de24-3e07-41f0-92cf-cbc198bd2949
+            partitioner:
+          batch_20250525195050:
+            id: 7de443a9-5b62-449d-81af-065f4a12e858
+            partitioner:
+          batch_20250525195228:
+            id: 437de2b2-3b1a-419a-bd9a-4e3085a60c56
+            partitioner:
+          batch_20250525201149:
+            id: 428b2dba-02b8-427a-8030-bfdd85094df4
+            partitioner:
+          batch_20250525201308:
+            id: 3e2bea5e-95ef-4094-90a3-a8b163637b83
+            partitioner:
+          batch_20250525203721:
+            id: 53342e47-4719-4a29-92de-68604ba2595f
+            partitioner:
+          batch_20250525204927:
+            id: 2e2ec59c-9c1d-4499-9eb7-a52b0995d9a1
+            partitioner:
+          batch_20250525210135:
+            id: 5ac8a68f-d125-4282-9d5e-811dae2634f7
+            partitioner:
+          batch_20250525210424:
+            id: f23c27e8-007a-40e0-98fe-6894e8716ca9
+            partitioner:
+          batch_20250525211656:
+            id: 2c0a8906-c5a2-49ee-bf1f-a7c61339f612
+            partitioner:
+          batch_20250525211814:
+            id: 0ecc2457-2e75-41ea-b699-f9e097de1326
+            partitioner:
+          batch_20250525212915:
+            id: 18f06cef-3447-4813-918f-73ce77e48a8e
+            partitioner:
+          batch_20250525212956:
+            id: 576200a9-d7ed-4eac-99fd-ab49bf367d2b
+            partitioner:
+          batch_20250525221714:
+            id: bb7f15c4-787b-43da-ae2e-af58d791eb59
+            partitioner:
+          batch_20250526002748:
+            id: ea826a31-444d-40cf-8020-11fae584ff66
+            partitioner:
+          batch_20250526101141:
+            id: 6f398d10-310b-4108-9be3-5d041e344296
+            partitioner:
+          batch_20250526124532:
+            id: ac3c0184-ce9a-450a-9965-01d0de4c0fdb
+            partitioner:
+          batch_20250526124607:
+            id: 125ae065-382e-4709-8809-29d123e8f660
+            partitioner:
+          batch_20250526124957:
+            id: b82e7095-5e68-41ca-a5b8-d45c517f18d9
+            partitioner:
+          batch_20250526125113:
+            id: a8b10be7-5150-431a-a214-7871105b16fe
+            partitioner:
+          batch_20250526130035:
+            id: 88b695ed-774b-421c-9733-eb1f841df3ce
+            partitioner:
+          batch_20250526130214:
+            id: 3e54810c-ed78-4561-b71d-016b09faf4b1
+            partitioner:
+          batch_20250526131256:
+            id: 70ef2cb2-6b70-4b3b-8f4b-b2cc971ba56b
+            partitioner:
+          batch_20250526131355:
+            id: ec0c72f2-450c-45ee-bd3d-cf7fc0ee08c3
+            partitioner:
+          batch_20250526141536:
+            id: 8cba61c0-f772-4f63-918b-3375b0602163
+            partitioner:
+          batch_20250527101129:
+            id: 4cddaec1-9d7f-4143-a65b-2b173b266bc9
+            partitioner:
+          batch_20250527101303:
+            id: 84b0c99e-8f0c-4725-a099-a2d49c772ae8
+            partitioner:
+  gx_silver_grupo01.bronze.weather:
+    type: spark
+    id: c6bf9da3-ed6d-48e0-9ef5-3aeb0e6d3160
+    assets:
+      data_asset_silver_grupo01.bronze.weather:
+        type: dataframe
+        id: b49c3014-99e9-4923-a434-b0f9168b2ef9
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525183225:
+            id: c15a7618-5b71-4a5a-9376-f92e7424daad
+            partitioner:
+          batch_20250525201310:
+            id: d0cb6d01-1cba-4de5-a8c3-f9dfaed3cc1d
+            partitioner:
+          batch_20250525204609:
+            id: 4cf4481d-8d39-4d74-8e0f-3d947e27a5fc
+            partitioner:
+          batch_20250525205830:
+            id: 5d39fd06-1db5-44ed-9b49-65046cc88799
+            partitioner:
+          batch_20250525210031:
+            id: 68ef8d38-caab-4cb0-9ef7-b8f8d9671dad
+            partitioner:
+          batch_20250525210739:
+            id: d53aecc8-4f8b-4014-be15-46b3d1b09273
+            partitioner:
+          batch_20250525210818:
+            id: c597f6f8-3998-4f61-904f-f61b5cb63ea6
+            partitioner:
+          batch_20250525211731:
+            id: dc52d491-dbfa-4288-ab31-468371ab6707
+            partitioner:
+          batch_20250525213343:
+            id: 5ab110d0-1c6f-4328-9bee-bedbd56b9c5e
+            partitioner:
+          batch_20250525221814:
+            id: 390a33d4-3f8f-4688-95ad-404a7bf7eebc
+            partitioner:
+          batch_20250526101156:
+            id: 1dbd5fb3-61c5-4414-831c-0fbf0fff17c6
+            partitioner:
+          batch_20250526125055:
+            id: 2e54e917-a209-4469-a4d3-1f7459fd4f24
+            partitioner:
+          batch_20250526130129:
+            id: ca3828cc-dcca-4906-afda-a0b0ce174070
+            partitioner:
+          batch_20250526131348:
+            id: 8b21098e-2457-43a0-8a9c-7f15ca7df3e5
+            partitioner:
+          batch_20250527101135:
+            id: beb8ea59-bf50-4075-acac-9380ea739802
+            partitioner:
+  gx_silver_grupo01.bronze.clima_tempo:
+    type: spark
+    id: 98a9f1a7-9253-46e7-82bd-709d90aa1aee
+    assets:
+      data_asset_silver_grupo01.bronze.clima_tempo:
+        type: dataframe
+        id: 68a764eb-a61e-4619-9058-fa39a3fdde63
+        batch_metadata: {}
+        batch_definitions:
+          batch_20250525204919:
+            id: d48d9513-6b48-4780-873e-d13f9b8cd8e5
+            partitioner:
+          batch_20250525205957:
+            id: 5fb7bd5a-e4db-4130-9974-e043791904bb
+            partitioner:
+          batch_20250525210331:
+            id: e556a119-5f39-49f4-8469-936abfd4860a
+            partitioner:
+          batch_20250526141532:
+            id: 9c6cfedc-05fc-4106-b1b2-21edfff3c194
+            partitioner:
+          batch_20250526183155:
+            id: df6d1c8e-4730-4dbf-8e1d-e0ba8a4745df
+            partitioner:
+analytics_enabled:
+data_context_id: 537a9b5a-148c-4018-84f2-0f5d3c072bc8

@@ -1,0 +1,9 @@
+{
+  "expectations": [],
+  "id": "ff9562ce-c905-4c92-bf44-0aa3573512f5",
+  "meta": {
+    "great_expectations_version": "1.4.5"
+  },
+  "name": "gx_suite_inpe",
+  "notes": null
+}
