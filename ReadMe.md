@@ -1,128 +1,130 @@
-# 🌧️ Projeto de Engenharia de Dados: Previsão do Clima com Databricks
+# 🌧️ Data Engineering Project: Weather Forecasting with Databricks
 
 ---
 
-### 1. 📖 Descrição do Projeto
+### 1. 📖 Project Description
 
-A tragédia causada pelas enchentes no Rio Grande do Sul em 2024 evidenciou a necessidade urgente de sistemas eficientes de alerta. Se a população tivesse sido avisada com antecedência sobre a alta quantidade de chuva prevista, muitos bens materiais poderiam ter sido protegidos e, principalmente, vidas poderiam ter sido salvas.
+The devastating floods in Rio Grande do Sul in 2024 highlighted the urgent need for effective warning systems. Advance warnings about the expected heavy rainfall could have helped people protect property and, most importantly, could have saved lives.
 
-Trabalhos como o **AQUALERT** mostram o potencial da tecnologia e da engenharia de dados para transformar dados em ações preventivas, promovendo segurança e resiliência diante de desastres naturais.
+Projects such as **AQUALERT** show how technology and data engineering can help communities act early and better withstand natural disasters.
 
-Este projeto visa construir um pipeline robusto e escalável, que reúna e trate dados meteorológicos de diversas fontes para disponibilizá-los em formato acessível a analistas, cientistas de dados e modelos de IA, com foco em detecção de riscos como alagamentos.
+This project aims to build a robust, scalable pipeline that collects and processes weather data from multiple sources. It makes the data accessible to analysts, data scientists, and AI models to help identify risks such as flooding.
 
-#### 📡 Dados utilizados:
+#### 📡 Data Sources
 
-* Clima Tempo via WebScraping — [https://www.climatempo.com.br/](https://www.climatempo.com.br/)
-* Weather via WebScraping — [https://weather.com/](https://weather.com/)
-* OpenWeatherMap via API — [https://openweathermap.org/](https://openweathermap.org/)
-* Weather API via API — [https://www.weatherapi.com/](https://www.weatherapi.com/)
-* INPE via API — [https://www.cptec.inpe.br/](https://www.cptec.inpe.br/)
+* [Climatempo](https://www.climatempo.com.br/) via web scraping
+* [Weather.com](https://weather.com/) via web scraping
+* [OpenWeatherMap](https://openweathermap.org/) via API
+* [WeatherAPI](https://www.weatherapi.com/) via API
+* [INPE](https://www.cptec.inpe.br/) via API
 
-#### 🔍 Fontes de pesquisa:
+#### 🔍 Research Sources
 
 * CNN Brasil
-* Scielo Brasil
+* SciELO Brasil
 * BBC News Brasil
-* ANA — Agência Nacional de Águas e Saneamento Básico
-* OMM — Organização Meteorológica Mundial
-* CEMADEN — Centro Nacional de Monitoramento e Alertas de Desastres Naturais
-* INMET — Instituto Nacional de Meteorologia
+* ANA (Brazil's National Water and Basic Sanitation Agency)
+* WMO (World Meteorological Organization)
+* CEMADEN (Brazil's National Center for Monitoring and Early Warning of Natural Disasters)
+* INMET (Brazil's National Institute of Meteorology)
 
 ---
 
-### 2. 🧰 Tecnologias e Ferramentas Utilizadas
+### 2. 🧰 Technologies and Tools
 
-![Arquitetura do Projeto](./ARQUITETURA.PNG)
+![Project architecture](./ARQUITETURA.PNG)
 
 * Python
-* Databricks (notebooks em PySpark)
+* Databricks (PySpark notebooks)
 * Azure Blob Storage
 * Unity Catalog
 * Delta Lake
 * Great Expectations
 * CWI Rocket
 * Databricks Workflows
-* PyTest
-* `concurrent.futures` (para paralelismo)
+* pytest
+* `concurrent.futures` (for parallel processing)
 * Azure Functions
----
-
-### 3. 🏗️ Arquitetura do Projeto
-
-* Ingestão de dados de múltiplas fontes (API/WebScraping)
-* Armazenamento em Azure Blob Storage
-* ETL em camadas (Bronze → Silver → Gold)
-* Validação de dados com Great Expectations
-* Governança e controle de acesso via Unity Catalog
-* Notificações via Teams e e-mail
-* Integração com IA (CWI Rocket) para geração de newsletters
-* Cadastro de e-mails para recebimento de boletins climáticos
----
-
-### 4. 🔄 Pipeline de Dados
-
-1. **Ingestão**
-
-   * Coleta via WebScraping e APIs com PySpark.
-   * Cada fonte recebe tratamento e schema individual.
-   * Persistência em Blob Storage nos formatos CSV e Parquet.
-
-2. **Camada Bronze**
-
-   * Dados carregados e salvos em tabelas com colunas padronizadas como `string`.
-
-3. **Validação (Bronze)**
-
-   * Uso de Great Expectations para verificar colunas críticas (`data_previsao`, `cidade`, `precipitacao`, etc.) contra valores nulos.
-
-4. **Camada Silver**
-
-   * Renomeação e conversão de tipos de dados.
-   * Limpeza de valores ruidosos.
-   * Persistência em Delta Lake.
-
-5. **Validação (Silver)**
-
-   * Aplicação de regras por fonte: valores esperados, faixas válidas e colunas obrigatórias.
-
-6. **Camada Gold**
-
-   * Consolidação dos dados em `clima_gold`.
-   * Criação de tabelas:
-
-     * `previsao_clima`: previsões para os próximos 15 dias.
-     * `alerta_alagamentos`: alertas com base em volume crítico por cidade.
-     * `clima_alagamento`: dados focados em precipitação e probabilidade.
-
-7. **Consumo dos Dados**
-
-   * Dashboards interativos no Databricks.
-   * Notificações automáticas para usuários em áreas de risco.
-   * Integração com CWI Rocket para geração de newsletters.
 
 ---
 
-### 5. ✅ Validações com Great Expectations
+### 3. 🏗️ Project Architecture
 
-* **Testes utilizados**:
+* Data ingestion from multiple sources via APIs and web scraping
+* Storage in Azure Blob Storage
+* Layered ETL (Bronze → Silver → Gold)
+* Data validation with Great Expectations
+* Governance and access control through Unity Catalog
+* Notifications via Microsoft Teams and email
+* AI integration with CWI Rocket to generate newsletters
+* Email sign-up for weather bulletins
+
+---
+
+### 4. 🔄 Data Pipeline
+
+1. **Ingestion**
+
+   * Collect data via web scraping and APIs using PySpark.
+   * Process each source separately using its own schema.
+   * Store the data in Blob Storage in CSV and Parquet formats.
+
+2. **Bronze Layer**
+
+   * Load and save data in tables with all columns standardized to the `string` type.
+
+3. **Bronze Validation**
+
+   * Use Great Expectations to check critical columns for null values, including `data_previsao`, `cidade`, and `precipitacao`.
+
+4. **Silver Layer**
+
+   * Rename columns and convert data types.
+   * Clean noisy values.
+   * Store the data in Delta Lake.
+
+5. **Silver Validation**
+
+   * Apply rules for each source, including expected values, valid ranges, and required columns.
+
+6. **Gold Layer**
+
+   * Consolidate the data in `clima_gold`.
+   * Create the following tables.
+
+     * `previsao_clima` contains forecasts for the next 15 days.
+     * `alerta_alagamentos` contains alerts based on critical rainfall thresholds for each city.
+     * `clima_alagamento` contains precipitation and probability data.
+
+7. **Data Consumption**
+
+   * Interactive dashboards in Databricks.
+   * Automatic notifications for users in areas at risk.
+   * Integration with CWI Rocket to generate newsletters.
+
+---
+
+### 5. ✅ Validation with Great Expectations
+
+* **Validation checks**
 
   * `expect_column_values_to_not_be_null`
   * `expect_column_values_to_be_between`
   * `expect_column_values_to_match_regex`
   * `expect_column_values_to_be_in_set`
 
-* **Armazenamento de resultados**:
+* **Result storage**
 
-  * Os relatórios são gerados em HTML no diretório `/uncommitted/data_docs/` e salvos em JSON em `/validations`.
+  * Great Expectations generates HTML reports in `/uncommitted/data_docs/` and saves validation results as JSON in `/validations`.
 
-* **Tratamento de falhas**:
+* **Failure handling**
 
-  * Caso algum checkpoint falhe, o pipeline aborta antes da próxima camada e o erro é logado.
-  * Logs e validações são utilizados para ajustes manuais ou notificações automatizadas via Databricks Workflows.
+  * If a checkpoint fails, the pipeline logs the error and stops before the next layer.
+  * Logs and validation results inform manual fixes or support automated notifications through Databricks Workflows.
 
 ---
 
-### 6. 📂 Estrutura de Diretórios
+### 6. 📂 Directory Structure
 
 ```bash
 📦grupo-01
@@ -140,52 +142,50 @@ Este projeto visa construir um pipeline robusto e escalável, que reúna e trate
 │   ├── cwi_rocket/
 │   ├── testes/
 │   └── utils/
-└── README.md
+└── ReadMe.md
 ```
 
 ---
 
-### 7. 🚀 Como Executar o Projeto
+### 7. 🚀 How to Run the Project
 
-1. **Pré-requisitos**:
+1. **Prerequisites**
 
-   * Instalar as bibliotecas: `beautifulsoup4`, `requests`, `great-expectations`, `pytest`.
+   * Install `beautifulsoup4`, `requests`, `great-expectations`, and `pytest`.
 
-2. **Configuração**:
+2. **Configuration**
 
-   * Defina suas chaves de acesso no arquivo `config/access_key.py`.
-   * Adicione as chaves de APIs e do CWI Rocket em `config/enum_config.py`.
+   * Set your access keys in `config/access_key.ipynb`.
+   * Add your API keys and CWI Rocket credentials in `config/enum_config.ipynb`.
 
-3. **Execução**:
+3. **Execution**
 
-   * Rodar o script `workflow/workflow.py` no Databricks para iniciar o pipeline completo.
-
----
-
-### 8. 🧪 Testes
-
-* Os testes foram implementados com `PyTest` no notebook:
-
-  * `src/testes/testa_funcoes_utilizadas.py`
-* Cobrem validações funcionais de coleta, transformação e consistência dos dados.
+   * Run the `workflow/workflow.ipynb` notebook in Databricks to start the full pipeline.
 
 ---
 
-### 9. 📊 Resultados e Conclusões
+### 8. 🧪 Tests
 
-* Os dados finais estão organizados e padronizados em Delta Tables.
-* São utilizados em dashboards, notificações de risco e modelos de machine learning.
-* A arquitetura foi desenhada para ser extensível: novas fontes podem ser integradas facilmente.
-* Com dados confiáveis e atualizados, é possível antecipar eventos críticos e agir preventivamente.
+* The `src/testes/testa_funcoes_utilizadas.ipynb` notebook contains `pytest` tests.
+* They cover data collection, transformation, and consistency.
 
 ---
 
-### 10. 📎 Referências
+### 9. 📊 Results and Conclusions
 
-#### 📌 Fontes de dados e pesquisa:
+* Delta tables store the organized, standardized data.
+* Dashboards, risk notifications, and machine learning models use this data.
+* The architecture makes it easy to integrate new data sources.
+* Reliable, up-to-date data can help anticipate critical events and support preventive action.
 
-* [Clima Tempo](https://www.climatempo.com.br/)
-* [Weather](https://weather.com/)
+---
+
+### 10. 📎 References
+
+#### 📌 Data and Research Sources
+
+* [Climatempo](https://www.climatempo.com.br/)
+* [Weather.com](https://weather.com/)
 * [OpenWeatherMap](https://openweathermap.org/)
 * [WeatherAPI](https://www.weatherapi.com/)
 * [INPE](https://www.cptec.inpe.br/)
@@ -194,16 +194,16 @@ Este projeto visa construir um pipeline robusto e escalável, que reúna e trate
 * [ANA](https://www.gov.br/ana/pt-br)
 * [CNN Brasil](https://www.cnnbrasil.com.br/)
 * [BBC News Brasil](https://www.bbc.com/portuguese)
-* [Scielo Brasil](https://scielo.org/)
+* [SciELO Brasil](https://scielo.org/)
 
-#### 📘 Documentações técnicas:
+#### 📘 Technical Documentation
 
 * [Databricks](https://docs.databricks.com/)
 * [PySpark](https://spark.apache.org/docs/latest/api/python/)
 * [Azure Blob Storage](https://learn.microsoft.com/pt-br/azure/storage/blobs/)
 * [Great Expectations](https://docs.greatexpectations.io/)
 * [Delta Lake](https://docs.delta.io/latest/delta-intro.html)
-* [CWI Rocket (IA)](https://www.cwi.com.br/)
+* [CWI Rocket (AI)](https://www.cwi.com.br/)
 * [Python concurrent.futures](https://docs.python.org/3/library/concurrent.futures.html)
-* [PyTest](https://docs.pytest.org/)
+* [pytest](https://docs.pytest.org/)
 * [Azure Functions Python developer guide](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators)
